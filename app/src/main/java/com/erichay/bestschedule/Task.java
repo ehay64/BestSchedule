@@ -2,7 +2,7 @@ package com.erichay.bestschedule;
 
 import java.util.Date;
 
-public class Task
+public class Task implements Comparable
 {
     //Constants
     final private double ratingConversion[] = {0, 1, 2, 3, 4, 5, 0.5, 1, 1.5, 2, 2.5, 3};
@@ -128,5 +128,24 @@ public class Task
         //Convert priority number back to hours
         taskPriorityNumber = taskPriorityNumber / ((MINS_IN_HOURS) * (SECONDS_IN_MINS));
         return taskPriorityNumber;
+    }
+
+    @Override
+    public int compareTo(Object object)
+    {
+        Task task1 = (Task) object;
+        //Compare the priority numbers
+        if(this.priorityNumber < task1.priorityNumber)
+        {
+            return -1;
+        }
+        else if(this.priorityNumber > task1.priorityNumber)
+        {
+            return 1;
+        }
+        else
+        {
+            return 0;
+        }
     }
 }

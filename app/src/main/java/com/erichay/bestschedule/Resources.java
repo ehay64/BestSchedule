@@ -6,6 +6,7 @@ import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class Resources
 {
@@ -73,5 +74,10 @@ public class Resources
         {
             e.printStackTrace();
         }
+    }
+
+    public static void sortTasks()
+    {
+        Collections.sort(ArrayList<Task> tasks);
     }
 }

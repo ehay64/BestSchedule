@@ -85,7 +85,6 @@ public class EditTask extends Activity
         {
             Task task = new Task(hours, date, name, rating);
             Resources.tasks.add(task);
-            //Resort tasks
         }
         else
         {
@@ -95,6 +94,24 @@ public class EditTask extends Activity
             task.setHours(hours);
             task.setPriority((int)rating);
         }
+
+        //Resort tasks
+
+        finish();
+    }
+
+    public void delete(View v)
+    {
+        if (taskId == -1)
+        {
+            finish();
+        }
+        else
+        {
+            Resources.deleteTask(taskId);
+        }
+
+        //Resort tasks
 
         finish();
     }

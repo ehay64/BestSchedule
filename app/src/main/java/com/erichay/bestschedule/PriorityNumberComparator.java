@@ -11,8 +11,6 @@ public class PriorityNumberComparator implements Comparator<Task>
     public int compare(Task task1, Task task2)
     {
         //Compare the values
-
-        return compare(task1.getPriorityNumber(), task2.getPriorityNumber());
+        return task1.compareTo(task2);
     }
-
 }
