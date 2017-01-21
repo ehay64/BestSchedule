@@ -95,7 +95,9 @@ public class EditTask extends Activity
             task.setPriority((int)rating);
         }
 
-        //Resort tasks
+        Resources.sortTasks();
+
+        Resources.save();
 
         finish();
     }
@@ -111,7 +113,9 @@ public class EditTask extends Activity
             Resources.deleteTask(taskId);
         }
 
-        //Resort tasks
+        Resources.sortTasks();
+
+        Resources.save();
 
         finish();
     }

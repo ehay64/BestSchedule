@@ -27,11 +27,11 @@ public class MainActivity extends Activity
         Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
         setActionBar(toolbar);
 
-        //Add 20 new tasks to the list
-        for (int i = 0; i < 20; i++)
-        {
-            Resources.tasks.add(new Task(10, new Date(),"Test Task: " + i, 3));
-        }
+        //Load the tasks
+        Resources.load();
+
+        //Sort the tasks
+        Resources.sortTasks();
 
         //Get the list view
         list = (ListView)findViewById(R.id.content);
@@ -53,6 +53,7 @@ public class MainActivity extends Activity
 
     protected void onResume()
     {
+        Resources.sortTasks();
         list.invalidateViews();
         super.onResume();
     }
