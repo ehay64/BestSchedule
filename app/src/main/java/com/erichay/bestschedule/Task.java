@@ -5,9 +5,10 @@ import java.util.Date;
 public class Task
 {
     //Constants
-    final private double ratingConversion[] = {1, 2, 3, 4, 5, 1, 1.5, 2, 2.5, 3};
+    final private double ratingConversion[] = {0, 1, 2, 3, 4, 5, 0.5, 1, 1.5, 2, 2.5, 3};
     final private int MINS_IN_HOURS = 60;
     final private int SECONDS_IN_MINS = 60;
+    final private int NUMBER_POSSIBLE_STARS = 6;
 
 
     //Instance Variables
@@ -112,11 +113,11 @@ public class Task
         //If the priority is zero
         if(initialPriority == 0)
         {
-            convertedPriority = 1;
+            convertedPriority = 0.5;
         }
         else
         {
-            convertedPriority = ratingConversion[initialPriority + 5];
+            convertedPriority = ratingConversion[initialPriority + NUMBER_POSSIBLE_STARS];
         }
         return convertedPriority;
     }
