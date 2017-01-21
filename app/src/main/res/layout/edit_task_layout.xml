@@ -59,7 +59,8 @@
             android:layout_height="wrap_content"
             android:inputType="datetime"
             android:hint="Date"
-            android:onClick="getDate"/>
+            android:onClick="getDate"
+            android:focusable="false"/>
 
         <TextView
             android:layout_width="wrap_content"
