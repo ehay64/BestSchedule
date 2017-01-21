@@ -79,7 +79,7 @@ public class MainActivity extends Activity
     public void deleteTask(final long taskId)
     {
         AlertDialog.Builder builder = new AlertDialog.Builder(this);
-        builder.setMessage("Are you sure you want to delete the task?").setTitle("Delete Task");
+        builder.setMessage("Are you sure you want to delete " + Resources.getTaskById(taskId).getName() + "?").setTitle("Delete Task");
         builder.setPositiveButton("Yes", new DialogInterface.OnClickListener()
         {
             public void onClick(DialogInterface dialog, int which)
