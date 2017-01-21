@@ -1,15 +1,23 @@
 package com.erichay.bestschedule;
 
+import android.app.AlertDialog;
+import android.content.DialogInterface;
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.Toolbar;
 
+import java.util.Date;
+
 public class MainActivity extends Activity
 {
+
+    ListView list;
 
     protected void onCreate(Bundle savedInstanceState)
     {
@@ -21,12 +29,23 @@ public class MainActivity extends Activity
         //Add 20 new tasks to the list
         for (int i = 0; i < 20; i++)
         {
-            Resources.tasks.add(new Task(10, "Test Task", 3, 4));
+            Resources.tasks.add(new Task(10, new Date(),"Test Task: " + i, 3));
         }
 
-        ListView list = (ListView)findViewById(R.id.content);
-
+        //Get the list view
+        list = (ListView)findViewById(R.id.content);
+        //Set the adapter
         list.setAdapter(new TaskAdapter(this));
+        //Set the action that occurs when an item is long clicked
+        list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
+        {
+            public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id)
+            {
+                Log.d("Deleting Task", "task id = " + id);
+                deleteTask(id);
+                return true;
+            }
+        });
 
     }
 
@@ -55,6 +74,29 @@ public class MainActivity extends Activity
         }
 
         return true;
+    }
+
+    public void deleteTask(final long taskId)
+    {
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Are you sure you want to delete the task?").setTitle("Delete Task");
+        builder.setPositiveButton("Yes", new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int which)
+            {
+                Resources.deleteTask(taskId);
+                list.invalidateViews();
+            }
+        });
+        builder.setNegativeButton("No", new DialogInterface.OnClickListener()
+        {
+            public void onClick(DialogInterface dialog, int which)
+            {
+                //Do nothing
+            }
+        });
+
+        builder.show();
     }
 
 }
