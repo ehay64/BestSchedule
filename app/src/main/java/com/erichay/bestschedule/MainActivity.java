@@ -2,6 +2,7 @@ package com.erichay.bestschedule;
 
 import android.app.AlertDialog;
 import android.content.DialogInterface;
+import android.content.Intent;
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
@@ -36,13 +37,14 @@ public class MainActivity extends Activity
         list = (ListView)findViewById(R.id.content);
         //Set the adapter
         list.setAdapter(new TaskAdapter(this));
+
         //Set the action that occurs when an item is long clicked
         list.setOnItemLongClickListener(new AdapterView.OnItemLongClickListener()
         {
             public boolean onItemLongClick(AdapterView<?> parent, View view, int position, long id)
             {
-                Log.d("Deleting Task", "task id = " + id);
-                deleteTask(id);
+                Log.d("Editing Task", "task id = " + id);
+                editTask(id);
                 return true;
             }
         });
@@ -63,6 +65,9 @@ public class MainActivity extends Activity
             {
                 //Launch the new activity here
                 Log.d("MainActivity", "New Task Activity Launched");
+                Intent intent = new Intent(getBaseContext(), EditTask.class);
+                intent.putExtra("TASK_ID", -1);
+                startActivity(intent);
                 break;
             }
 
@@ -97,6 +102,13 @@ public class MainActivity extends Activity
         });
 
         builder.show();
+    }
+
+    public void editTask(final long taskId)
+    {
+        Intent intent = new Intent(getBaseContext(), EditTask.class);
+        intent.putExtra("TASK_ID", taskId);
+        startActivity(intent);
     }
 
 }

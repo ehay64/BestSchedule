@@ -3,4 +3,6 @@
     <string name="title_activity_main">Best Schedule</string>
 
     <string name="new_task">New Task</string>
+
+    <string name="title_activity_edit_task">EditTask</string>
 </resources>

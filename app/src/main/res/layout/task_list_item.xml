@@ -4,7 +4,7 @@
     android:orientation="vertical"
     android:layout_width="match_parent"
     android:padding="10dp"
-    android:layout_height="60dp"
+    android:layout_height="wrap_content"
     android:elevation="8dp"
     android:longClickable="true">
 
@@ -13,7 +13,9 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:text="Task Title"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:textIsSelectable="false"/>
+
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -24,13 +26,15 @@
             android:id="@+id/task_hours"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:text="hours"/>
+            android:text="hours"
+            android:textIsSelectable="false"/>
 
         <TextView
             android:id="@+id/due_date"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="due date"/>
+            android:text="due date"
+            android:textIsSelectable="false"/>
 
     </LinearLayout>
 
@@ -38,6 +42,8 @@
         android:id="@+id/rating"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        style="?android:attr/ratingBarStyleSmall"/>
+        style="?android:attr/ratingBarStyleSmall"
+        android:focusable="false"/>
+
 
 </LinearLayout>
