@@ -15,7 +15,7 @@ public class Task
     private Date dueDate;
     private String name = "";
     private long uniqueID = 0;
-    private double priority = 1;
+    private int priority = 1;
     private double priorityNumber = 0;
 
     //Static variables
@@ -33,15 +33,15 @@ public class Task
         newID++;
     }
 
-    public Task(int taskHours, Date taskDueDate, String taskName, int taskPriority)
+    public Task(int taskHours, Date taskDueDate, String taskName, double taskPriority)
     {
         hours = taskHours;
         dueDate = taskDueDate;
         name = taskName;
         uniqueID = newID;
-        priority = taskPriority;
+        priority = (int) taskPriority;
         //Calculate the priority number
-        priorityNumber = this.calculatePriorityNumber(taskDueDate, calculateAdjustedHours(convertPriority(taskPriority), taskHours));
+        priorityNumber = this.calculatePriorityNumber(taskDueDate, calculateAdjustedHours(convertPriority((int)taskPriority), taskHours));
         //Move to next ID
         newID++;
     }
