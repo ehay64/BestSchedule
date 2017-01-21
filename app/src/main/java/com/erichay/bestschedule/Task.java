@@ -5,7 +5,9 @@ import java.util.Date;
 public class Task
 {
     //Constants
-    private double ratingConversion[] = {1, 2, 3, 4, 5, 1, 1.5, 2, 2.5, 3};
+    final private double ratingConversion[] = {1, 2, 3, 4, 5, 1, 1.5, 2, 2.5, 3};
+    final private int MINS_IN_HOURS = 60;
+    final private int SECONDS_IN_MINS = 60;
 
 
     //Instance Variables
@@ -31,14 +33,15 @@ public class Task
         newID++;
     }
 
-    public Task(int taskHours, String taskName, int taskPriority, int taskPriorityNumber)
+    public Task(int taskHours, Date taskDueDate, String taskName, int taskPriority)
     {
         hours = taskHours;
-        dueDate = new Date();
+        dueDate = taskDueDate;
         name = taskName;
         uniqueID = newID;
         priority = taskPriority;
-        priorityNumber = taskPriorityNumber;
+        //Calculate the priority number
+        priorityNumber = this.calculatePriorityNumber(taskDueDate, calculateAdjustedHours(convertPriority(taskPriority), taskHours));
         //Move to next ID
         newID++;
     }
@@ -118,7 +121,11 @@ public class Task
         return convertedPriority;
     }
 
-
-
-
+    public long calculatePriorityNumber(Date taskDueDate, double taskAdjustedPriority)
+    {
+        long taskPriorityNumber = (taskDueDate.getTime()/1000) - (System.currentTimeMillis()/1000) - ((int)taskAdjustedPriority * (MINS_IN_HOURS) * (SECONDS_IN_MINS));
+        //Convert priority number back to hours
+        taskPriorityNumber = taskPriorityNumber / ((MINS_IN_HOURS) * (SECONDS_IN_MINS));
+        return taskPriorityNumber;
+    }
 }
