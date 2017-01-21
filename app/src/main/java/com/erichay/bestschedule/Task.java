@@ -26,14 +26,15 @@ public class Task
      */
     public Task()
     {
+        dueDate = new Date();
         uniqueID = newID;
         newID++;
     }
 
-    public Task(int taskHours, Date taskDueDate, String taskName, int taskPriority, int taskPriorityNumber)
+    public Task(int taskHours, String taskName, int taskPriority, int taskPriorityNumber)
     {
         hours = taskHours;
-        dueDate = taskDueDate;
+        dueDate = new Date();
         name = taskName;
         uniqueID = newID;
         priority = taskPriority;
