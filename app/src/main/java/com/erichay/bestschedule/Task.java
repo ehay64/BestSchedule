@@ -16,7 +16,7 @@ public class Task
     private Date dueDate;
     private String name = "";
     private long uniqueID = 0;
-    private int priority = 1;
+    private double priority = 1;
     private double priorityNumber = 0;
 
     //Static variables
@@ -95,7 +95,7 @@ public class Task
         this.name = name;
     }
 
-    public void setPriority(int priority)
+    public void setPriority(double priority)
     {
         this.priority = priority;
     }
