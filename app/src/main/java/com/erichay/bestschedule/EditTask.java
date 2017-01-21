@@ -3,9 +3,9 @@ package com.erichay.bestschedule;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.app.Activity;
-import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.RatingBar;
 import android.widget.Toolbar;
 
 import java.util.Date;
@@ -45,6 +45,7 @@ public class EditTask extends Activity
             ((EditText)findViewById(R.id.edit_name)).setText(task.getName());
             ((EditText)findViewById(R.id.edit_hours)).setText(Integer.toString(task.getHours()));
             ((EditText)findViewById(R.id.edit_date)).setText(task.getDueDate().toString());
+            ((RatingBar)findViewById(R.id.edit_rating)).setRating((float)task.getPriority());
             date = task.getDueDate();
         }
     }
@@ -72,6 +73,30 @@ public class EditTask extends Activity
 
         date = new Date(year - 1900, month, day, hour, minute);
         ((EditText)findViewById(R.id.edit_date)).setText(date.toString());
+    }
+
+    public void save(View v)
+    {
+        String name = ((EditText)findViewById(R.id.edit_name)).getText().toString();
+        int hours = Integer.parseInt(((EditText)findViewById(R.id.edit_hours)).getText().toString());
+        double rating = ((RatingBar)findViewById(R.id.edit_rating)).getRating();
+
+        if (taskId == -1)
+        {
+            Task task = new Task(hours, date, name, rating);
+            Resources.tasks.add(task);
+            //Resort tasks
+        }
+        else
+        {
+            Task task = Resources.getTaskById(taskId);
+            task.setName(name);
+            task.setDueDate(date);
+            task.setHours(hours);
+            task.setPriority((int)rating);
+        }
+
+        finish();
     }
 
 }

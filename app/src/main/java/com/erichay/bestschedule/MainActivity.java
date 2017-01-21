@@ -51,6 +51,12 @@ public class MainActivity extends Activity
 
     }
 
+    protected void onResume()
+    {
+        list.invalidateViews();
+        super.onResume();
+    }
+
     public boolean onCreateOptionsMenu(Menu menu)
     {
         getMenuInflater().inflate(R.menu.toolbar_menu, menu);
