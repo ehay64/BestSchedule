@@ -12,7 +12,7 @@ public class Task
     private int hours = 0;
     private Date dueDate;
     private String name = "";
-    private int uniqueID = 0;
+    private long uniqueID = 0;
     private double priority = 1;
     private double priorityNumber = 0;
 
@@ -69,6 +69,11 @@ public class Task
         return priorityNumber;
     }
 
+    public long getUniqueID()
+    {
+        return uniqueID;
+    }
+
     //Setters
     public void setHours(int hours)
     {
@@ -111,6 +116,8 @@ public class Task
         }
         return convertedPriority;
     }
+
+
 
 
 }
