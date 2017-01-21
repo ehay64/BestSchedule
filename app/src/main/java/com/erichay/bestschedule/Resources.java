@@ -78,6 +78,6 @@ public class Resources
 
     public static void sortTasks()
     {
-        Collections.sort(ArrayList<Task> tasks);
+        Collections.sort(tasks, new PriorityNumberComparator());
     }
 }
