@@ -124,7 +124,6 @@ public class Task implements Comparable, Serializable
         this.hours = hours;
         //Changed hours after work was done
         this.priorityNumber = calculatePriorityNumber(this.dueDate, this.calculateAdjustedHours(this.convertPriority((int) this.priority), this.hours));
-        //Reset the tasks after the change
     }
 
     /**
