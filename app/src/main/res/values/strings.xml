@@ -5,4 +5,5 @@
     <string name="new_task">New Task</string>
 
     <string name="title_activity_edit_task">EditTask</string>
+    <string name="title_activity_loading">LoadingActivity</string>
 </resources>
