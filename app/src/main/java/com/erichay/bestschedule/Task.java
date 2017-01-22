@@ -58,31 +58,56 @@ public class Task implements Comparable, Serializable
 
     //Methods
     //Getters
+
+    /**
+     * Gets the hours of the task
+     * @return Hours of the task
+     */
     public int getHours()
     {
         return hours;
     }
 
+    /**
+     * Gets the due date of the app
+     * @return Due date of the app
+     */
     public Date getDueDate()
     {
         return dueDate;
     }
 
+    /**
+     * Gets the name of the task
+     * @return Name of the task
+     */
     public String getName()
     {
         return name;
     }
 
+    /**
+     * Gets the priority of the task
+     * @return Priority of the task
+     */
     public double getPriority()
     {
         return priority;
     }
 
+    /**
+     * Gets the priority number of the app
+     * @return Priority number of the app
+     */
     public double getPriorityNumber()
     {
         return priorityNumber;
     }
 
+    /**
+     * Gets the unique ID of the task
+     * @return Unique ID of the task
+     */
     public long getUniqueID()
     {
         return uniqueID;
@@ -142,15 +167,22 @@ public class Task implements Comparable, Serializable
         return (convertedPriority * hoursBeforeCalc);
     }
 
+    /**
+     * Converts priority to a multiplication factor. The higher the priority, the higher the multiplication factor
+     * @param initialPriority The priority chosen by the user with the star rating bar
+     * @return The converted priority as a multiplication factor
+     */
     public double convertPriority(int initialPriority)
     {
-        double convertedPriority;
-
-            convertedPriority = ratingConversion[initialPriority + NUMBER_POSSIBLE_STARS];
-
-        return convertedPriority;
+            return ratingConversion[initialPriority + NUMBER_POSSIBLE_STARS];
     }
 
+    /**
+     * Calculates the priority number using the due date, current date and adjusted hours
+     * @param taskDueDate The due date of the task
+     * @param taskAdjustedPriority The adjusted hours of the task based on priority
+     * @return An integer that represents the task as a function of its due date, current date, and adjusted hours
+     */
     public long calculatePriorityNumber(Date taskDueDate, double taskAdjustedPriority)
     {
         long taskPriorityNumber = (taskDueDate.getTime()/1000) - (System.currentTimeMillis()/1000) - ((int)taskAdjustedPriority * (MINS_IN_HOURS) * (SECONDS_IN_MINS));
@@ -160,6 +192,9 @@ public class Task implements Comparable, Serializable
     }
 
     @Override
+    /**
+     * Used to compare a pair of tasks. This method is used by the PriorityNumberComparator to sort all the tasks
+     */
     public int compareTo(Object object)
     {
         Task task1 = (Task) object;
@@ -177,5 +212,4 @@ public class Task implements Comparable, Serializable
             return 0;
         }
     }
-
 }
