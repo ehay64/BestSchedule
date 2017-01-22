@@ -1,5 +1,9 @@
 package com.erichay.bestschedule;
 
+import android.content.Context;
+import android.util.Log;
+
+import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -38,11 +42,15 @@ public class Resources
         return null;
     }
 
-    public static void save()
+    public static void save(Context context)
     {
+        File file = new File(context.getFilesDir(), "taskList");
+
+        Log.d("File", file.toString());
+
         try
         {
-            FileOutputStream writeStream = new FileOutputStream("taskList");
+            FileOutputStream writeStream = new FileOutputStream(file);
             ObjectOutputStream writeObjectStream = new ObjectOutputStream(writeStream);
             writeObjectStream.writeObject(tasks);
             //Close streams
@@ -55,11 +63,13 @@ public class Resources
         }
     }
 
-    public static void load()
+    public static void load(Context context)
     {
+        File file = new File(context.getFilesDir(), "taskList");
+
         try
         {
-            FileInputStream readStream = new FileInputStream("taskList");
+            FileInputStream readStream = new FileInputStream(file);
             ObjectInputStream readObjectStream = new ObjectInputStream(readStream);
             tasks = (ArrayList<Task>) readObjectStream.readObject();
             //Close streams
