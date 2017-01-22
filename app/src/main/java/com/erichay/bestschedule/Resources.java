@@ -16,6 +16,11 @@ public class Resources
 {
     public static ArrayList<Task> tasks = new ArrayList<Task>();
 
+    /**
+     * Removes a task from the task-list
+     * @param id The unique ID of the task to be deleted
+     * @return Boolean, true if the task was removed
+     */
     public static boolean deleteTask(long id)
     {
         for (int i = 0; i < tasks.size(); i++)
@@ -29,6 +34,11 @@ public class Resources
         return false;
     }
 
+    /**
+     * Finds task by its unique ID and returns task
+     * @param id The unique ID of the task to be deleted
+     * @return task object if found, null if not found
+     */
     public static Task getTaskById(long id)
     {
         for (int i = 0; i < tasks.size(); i++)
@@ -42,6 +52,10 @@ public class Resources
         return null;
     }
 
+    /**
+     * Save the task list to internal storage on android device.
+     * @param context Current state of the application/object
+     */
     public static void save(Context context)
     {
         File file = new File(context.getFilesDir(), "taskList");
@@ -63,6 +77,10 @@ public class Resources
         }
     }
 
+    /**
+     * load task list from the device's internal storage
+     * @param context Current state of the application/object
+     */
     public static void load(Context context)
     {
         File file = new File(context.getFilesDir(), "taskList");
@@ -86,14 +104,19 @@ public class Resources
         }
     }
 
+    /**
+     * Sort tasks using comparator
+     */
     public static void sortTasks()
     {
         Collections.sort(tasks, new PriorityNumberComparator());
     }
 
+    /**
+     * Go through each task and recalculate priority
+     */
     public static void recalculatePriorityValues()
     {
-        //Go through each task and recalculate priority
         for(int i = 0; i < tasks.size(); i++)
         {
             Task currentTask = tasks.get(i);
