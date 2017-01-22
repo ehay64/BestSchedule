@@ -97,7 +97,7 @@ public class EditTask extends Activity
 
         Resources.sortTasks();
 
-        Resources.save();
+        Resources.save(this);
 
         finish();
     }
@@ -115,7 +115,7 @@ public class EditTask extends Activity
 
         Resources.sortTasks();
 
-        Resources.save();
+        Resources.save(this);
 
         finish();
     }

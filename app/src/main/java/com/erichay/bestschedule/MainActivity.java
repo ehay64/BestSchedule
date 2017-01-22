@@ -28,7 +28,7 @@ public class MainActivity extends Activity
         setActionBar(toolbar);
 
         //Load the tasks
-        Resources.load();
+        Resources.load(this);
 
         //Sort the tasks
         Resources.sortTasks();
