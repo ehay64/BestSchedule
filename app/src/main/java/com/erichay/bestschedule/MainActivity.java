@@ -30,6 +30,9 @@ public class MainActivity extends Activity
         //Load the tasks
         Resources.load(this);
 
+        //Update the priorities
+        Resources.recalculatePriorityValues();
+
         //Sort the tasks
         Resources.sortTasks();
 
@@ -53,6 +56,7 @@ public class MainActivity extends Activity
 
     protected void onResume()
     {
+        Resources.recalculatePriorityValues();
         Resources.sortTasks();
         list.invalidateViews();
         super.onResume();
