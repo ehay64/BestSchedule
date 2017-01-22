@@ -3,6 +3,7 @@ package com.erichay.bestschedule;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.app.Activity;
+import android.util.Log;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.RatingBar;
@@ -47,6 +48,8 @@ public class EditTask extends Activity
             ((EditText)findViewById(R.id.edit_date)).setText(task.getDueDate().toString());
             ((RatingBar)findViewById(R.id.edit_rating)).setRating((float)task.getPriority());
             date = task.getDueDate();
+
+            Log.d("EditTask", Long.toString(taskId));
         }
     }
 

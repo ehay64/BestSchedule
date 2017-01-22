@@ -21,7 +21,7 @@ public class Task implements Comparable, Serializable
     private double priorityNumber = 0;
 
     //Static variables
-    private static int newID = 0;
+    public static long newID = 0;
 
     //Constructors
 
@@ -152,4 +152,5 @@ public class Task implements Comparable, Serializable
             return 0;
         }
     }
+
 }
