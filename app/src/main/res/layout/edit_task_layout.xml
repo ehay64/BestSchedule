@@ -13,7 +13,8 @@
         android:layout_height="55dp"
         android:title="@string/title_activity_edit_task"
         android:elevation="4dp"
-        android:background="@color/colorPrimary" >
+        android:background="@color/colorPrimary"
+        android:titleTextColor="@color/heading">
     </Toolbar>
 
     <LinearLayout
