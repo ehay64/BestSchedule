@@ -3,6 +3,13 @@ package com.erichay.bestschedule;
 import java.io.Serializable;
 import java.util.Date;
 
+/**
+ * Task keeps tracks of the hours, due date, and priority.
+ *
+ * @date January 21, 2017
+ * @author Jeffrey Yamasaki
+ */
+
 public class Task implements Comparable, Serializable
 {
     //Constants
@@ -23,7 +30,7 @@ public class Task implements Comparable, Serializable
     //Constructors
 
     /**
-     * Creates a task that dictates what the user has to do
+     * Creates a task that dictates what the user has to do, default behaviour
      */
     public Task()
     {
@@ -31,6 +38,13 @@ public class Task implements Comparable, Serializable
         uniqueID = System.currentTimeMillis();
     }
 
+    /**
+     * Creates a task with a specific hour set, due date, name, and priority
+     * @param taskHours The estimated number of hours needed to complete the task
+     * @param taskDueDate The due date of the task
+     * @param taskName The name of the task
+     * @param taskPriority The priority of the task as a rating of five stars, zero is least important, 5 is the msot important
+     */
     public Task(int taskHours, Date taskDueDate, String taskName, double taskPriority)
     {
         hours = taskHours;
@@ -75,48 +89,65 @@ public class Task implements Comparable, Serializable
     }
 
     //Setters
+
+    /**
+     * Sets the number of hours left on the task and recalculates the priority number based on the change in hours
+     * @param hours The number of hours left to work on the task
+     */
     public void setHours(int hours)
     {
         this.hours = hours;
         //Changed hours after work was done
-        this.priorityNumber = calculatePriorityNumber(this.dueDate, this.calculateAdjustedHours(this.priority, this.hours));
+        this.priorityNumber = calculatePriorityNumber(this.dueDate, this.calculateAdjustedHours(this.convertPriority((int) this.priority), this.hours));
         //Reset the tasks after the change
     }
 
+    /**
+     * Sets the due date
+     * @param dueDate The due date of the task
+     */
     public void setDueDate(Date dueDate)
     {
         this.dueDate = dueDate;
     }
 
+    /**
+     * Sets the name
+     * @param name The name of the task
+     */
     public void setName(String name)
     {
         this.name = name;
     }
 
+    /**
+     * Sets the priority
+     * @param priority The priority of the task
+     */
     public void setPriority(double priority)
     {
         this.priority = priority;
     }
 
     //Calculation Methods
-    public double calculateAdjustedHours(double priorityBeforeCalc, int hoursBeforeCalc)
+
+    /**
+     * Calculates the adjusted number of hours based on priority and the hours of the task
+     * @param convertedPriority The priority multiplier after being converted
+     * @param hoursBeforeCalc
+     * @return The hours of hours adjusted after priority
+     */
+    public double calculateAdjustedHours(double convertedPriority, int hoursBeforeCalc)
     {
-        double adjustedHours = priorityBeforeCalc * hoursBeforeCalc;
-        return adjustedHours;
+        return (convertedPriority * hoursBeforeCalc);
     }
 
     public double convertPriority(int initialPriority)
     {
         double convertedPriority;
-        //If the priority is zero
-        if(initialPriority == 0)
-        {
-            convertedPriority = 0.5;
-        }
-        else
-        {
+
             convertedPriority = ratingConversion[initialPriority + NUMBER_POSSIBLE_STARS];
-        }
+
         return convertedPriority;
     }
 
