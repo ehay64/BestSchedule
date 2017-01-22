@@ -2,11 +2,14 @@ package com.erichay.bestschedule;
 
 import android.app.AlertDialog;
 import android.app.DialogFragment;
+import android.content.Context;
 import android.os.Bundle;
 import android.app.Activity;
 import android.util.Log;
 import android.view.View;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.EditText;
+import android.widget.LinearLayout;
 import android.widget.RatingBar;
 import android.widget.Toolbar;
 
@@ -54,6 +57,9 @@ public class EditTask extends Activity
 
     public void getDate(View v)
     {
+        InputMethodManager imm = (InputMethodManager)getSystemService(Context.INPUT_METHOD_SERVICE);
+        imm.hideSoftInputFromWindow(((LinearLayout)findViewById(R.id.edit_content)).getWindowToken(), 0);
+
         DialogFragment dateFragment = new DatePickerFragment();
         dateFragment.show(getFragmentManager(), "datePicker");
     }
@@ -96,7 +102,7 @@ public class EditTask extends Activity
             return;
         }
 
-        if (date == null)
+        if (date == null || name.isEmpty())
         {
             Log.e("Input", "date error");
             errorDialog();
