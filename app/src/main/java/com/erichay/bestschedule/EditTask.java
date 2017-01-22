@@ -48,8 +48,6 @@ public class EditTask extends Activity
             ((EditText)findViewById(R.id.edit_date)).setText(task.getDueDate().toString());
             ((RatingBar)findViewById(R.id.edit_rating)).setRating((float)task.getPriority());
             date = task.getDueDate();
-
-            Log.d("EditTask", Long.toString(taskId));
         }
     }
 
@@ -80,9 +78,27 @@ public class EditTask extends Activity
 
     public void save(View v)
     {
-        String name = ((EditText)findViewById(R.id.edit_name)).getText().toString();
-        int hours = Integer.parseInt(((EditText)findViewById(R.id.edit_hours)).getText().toString());
-        double rating = ((RatingBar)findViewById(R.id.edit_rating)).getRating();
+        String name;
+        int hours;
+        double rating;
+
+        try
+        {
+            name = ((EditText) findViewById(R.id.edit_name)).getText().toString();
+            hours = Integer.parseInt(((EditText) findViewById(R.id.edit_hours)).getText().toString());
+            rating = ((RatingBar) findViewById(R.id.edit_rating)).getRating();
+        }
+        catch (NumberFormatException e)
+        {
+            Log.e("Input", "number format error");
+            return;
+        }
+
+        if (date == null)
+        {
+            Log.e("Input", "date error");
+            return;
+        }
 
         if (taskId == -1)
         {
@@ -98,8 +114,8 @@ public class EditTask extends Activity
             task.setPriority((int)rating);
         }
 
+        Resources.recalculatePriorityValues();
         Resources.sortTasks();
-
         Resources.save(this);
 
         finish();
@@ -117,7 +133,6 @@ public class EditTask extends Activity
         }
 
         Resources.sortTasks();
-
         Resources.save(this);
 
         finish();
