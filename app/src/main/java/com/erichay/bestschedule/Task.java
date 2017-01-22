@@ -20,9 +20,6 @@ public class Task implements Comparable, Serializable
     private double priority = 1;
     private double priorityNumber = 0;
 
-    //Static variables
-    private static int newID = 0;
-
     //Constructors
 
     /**
@@ -31,8 +28,7 @@ public class Task implements Comparable, Serializable
     public Task()
     {
         dueDate = new Date();
-        uniqueID = newID;
-        newID++;
+        uniqueID = System.currentTimeMillis();
     }
 
     public Task(int taskHours, Date taskDueDate, String taskName, double taskPriority)
@@ -40,12 +36,10 @@ public class Task implements Comparable, Serializable
         hours = taskHours;
         dueDate = taskDueDate;
         name = taskName;
-        uniqueID = newID;
+        uniqueID = System.currentTimeMillis();
         priority = (int) taskPriority;
         //Calculate the priority number
         priorityNumber = this.calculatePriorityNumber(taskDueDate, calculateAdjustedHours(convertPriority((int)taskPriority), taskHours));
-        //Move to next ID
-        newID++;
     }
 
     //Methods
