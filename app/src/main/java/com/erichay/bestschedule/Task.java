@@ -17,6 +17,7 @@ public class Task implements Comparable, Serializable
     final private int MINS_IN_HOURS = 60;
     final private int SECONDS_IN_MINS = 60;
     final private int NUMBER_POSSIBLE_STARS = 6;
+    final private double NUMBER_OF_WORKING_HOURS_AS_PERCENTAGE = (1/3);
 
 
     //Instance Variables
@@ -184,7 +185,7 @@ public class Task implements Comparable, Serializable
      */
     public long calculatePriorityNumber(Date taskDueDate, double taskAdjustedPriority)
     {
-        long taskPriorityNumber = (taskDueDate.getTime()/1000) - (System.currentTimeMillis()/1000) - ((int)taskAdjustedPriority * (MINS_IN_HOURS) * (SECONDS_IN_MINS));
+        long taskPriorityNumber = (long)((taskDueDate.getTime()/1000) * NUMBER_OF_WORKING_HOURS_AS_PERCENTAGE) - (long)((System.currentTimeMillis()/1000) * NUMBER_OF_WORKING_HOURS_AS_PERCENTAGE) - ((int)taskAdjustedPriority * (MINS_IN_HOURS) * (SECONDS_IN_MINS));
         //Convert priority number back to hours
         taskPriorityNumber = taskPriorityNumber / ((MINS_IN_HOURS) * (SECONDS_IN_MINS));
         return taskPriorityNumber;
