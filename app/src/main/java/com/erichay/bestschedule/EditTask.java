@@ -1,5 +1,6 @@
 package com.erichay.bestschedule;
 
+import android.app.AlertDialog;
 import android.app.DialogFragment;
 import android.os.Bundle;
 import android.app.Activity;
@@ -91,12 +92,14 @@ public class EditTask extends Activity
         catch (NumberFormatException e)
         {
             Log.e("Input", "number format error");
+            errorDialog();
             return;
         }
 
         if (date == null)
         {
             Log.e("Input", "date error");
+            errorDialog();
             return;
         }
 
@@ -140,6 +143,9 @@ public class EditTask extends Activity
 
     private void errorDialog()
     {
-
+        AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Your inputs make me sad...").setTitle(":(");
+        AlertDialog dialog = builder.create();
+        dialog.show();
     }
 }
