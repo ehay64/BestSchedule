@@ -80,4 +80,15 @@ public class Resources
     {
         Collections.sort(tasks, new PriorityNumberComparator());
     }
+
+    public static void recalculatePriorityValues()
+    {
+        //Go through each task and recalculate priority
+        for(int i = 0; i < tasks.size(); i++)
+        {
+            Task currentTask = tasks.get(i);
+            currentTask.calculatePriorityNumber(currentTask.getDueDate(), currentTask.calculateAdjustedHours(currentTask.convertPriority((int) currentTask.getPriority()), currentTask.getHours()));
+        }
+        sortTasks();
+    }
 }

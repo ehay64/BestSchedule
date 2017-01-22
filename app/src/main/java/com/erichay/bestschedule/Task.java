@@ -83,6 +83,9 @@ public class Task implements Comparable
     public void setHours(int hours)
     {
         this.hours = hours;
+        //Changed hours after work was done
+        this.priorityNumber = calculatePriorityNumber(this.dueDate, this.calculateAdjustedHours(this.priority, this.hours));
+        //Reset the tasks after the change
     }
 
     public void setDueDate(Date dueDate)
