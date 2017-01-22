@@ -138,4 +138,8 @@ public class EditTask extends Activity
         finish();
     }
 
+    private void errorDialog()
+    {
+
+    }
 }
