@@ -13,12 +13,10 @@ import java.util.Date;
 public class Task implements Comparable, Serializable
 {
     //Constants
-    final private double ratingConversion[] = {0, 1, 2, 3, 4, 5, 0.5, 1, 1.5, 2, 2.5, 3};
+    final private double ratingConversion[] = {0, 1, 2, 3, 4, 5, 1, 2, 3, 4, 5, 6};
     final private int MINS_IN_HOURS = 60;
     final private int SECONDS_IN_MINS = 60;
     final private int NUMBER_POSSIBLE_STARS = 6;
-    final private double NUMBER_OF_WORKING_HOURS_AS_PERCENTAGE = (1/3);
-
 
     //Instance Variables
     private int hours = 0;
@@ -134,6 +132,8 @@ public class Task implements Comparable, Serializable
     public void setDueDate(Date dueDate)
     {
         this.dueDate = dueDate;
+        //Changed hours to reflect new due date
+        this.priorityNumber = calculatePriorityNumber(this.dueDate, this.calculateAdjustedHours(this.convertPriority((int) this.priority), this.hours));
     }
 
     /**
@@ -152,6 +152,8 @@ public class Task implements Comparable, Serializable
     public void setPriority(double priority)
     {
         this.priority = priority;
+        //Changed hours to reflect new priority
+        this.priorityNumber = calculatePriorityNumber(this.dueDate, this.calculateAdjustedHours(this.convertPriority((int) this.priority), this.hours));
     }
 
     //Calculation Methods
@@ -185,7 +187,7 @@ public class Task implements Comparable, Serializable
      */
     public long calculatePriorityNumber(Date taskDueDate, double taskAdjustedPriority)
     {
-        long taskPriorityNumber = (long)((taskDueDate.getTime()/1000) * NUMBER_OF_WORKING_HOURS_AS_PERCENTAGE) - (long)((System.currentTimeMillis()/1000) * NUMBER_OF_WORKING_HOURS_AS_PERCENTAGE) - ((int)taskAdjustedPriority * (MINS_IN_HOURS) * (SECONDS_IN_MINS));
+        long taskPriorityNumber = ((taskDueDate.getTime()/1000) - ((System.currentTimeMillis()/1000))) - ((int)taskAdjustedPriority * (MINS_IN_HOURS) * (SECONDS_IN_MINS));
         //Convert priority number back to hours
         taskPriorityNumber = taskPriorityNumber / ((MINS_IN_HOURS) * (SECONDS_IN_MINS));
         return taskPriorityNumber;
